@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Dosya yolunu tam olarak belirtiyoruz
-file_path = r'C:\Users\Barış\Desktop\soru1_2_data.xlsx'
+file_path = 'excel_files/soru1_2_data.xlsx'
 
 # Dosyayı yükle
 df = pd.read_excel(file_path)
