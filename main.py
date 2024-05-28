@@ -1,16 +1,33 @@
-# This is a sample Python script.
+import pandas as pd
+import numpy as np
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Dosya yolunu tam olarak belirtiyoruz
+file_path = r'C:\Users\Barış\Desktop\soru1_2_data.xlsx'
+
+# Dosyayı yükle
+df = pd.read_excel(file_path)
+
+# Veriyi numpy array'e çevir
+data = df.to_numpy()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Contrast Stretching fonksiyonu
+def contrast_stretching(data, L=256):
+    min_val = np.min(data)
+    max_val = np.max(data)
+    rows, cols = data.shape
+    stretched_data = np.zeros((rows, cols))
+
+    for i in range(rows):
+        for j in range(cols):
+            stretched_data[i, j] = ((data[i, j] - min_val) / (max_val - min_val)) * (L - 1)
+
+    return stretched_data
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Contrast Stretching uygulaması
+stretched_data = contrast_stretching(data)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Sonuçları daha okunaklı bir formatta yazdırma
+with np.printoptions(precision=2, suppress=True):
+    print("Contrast Stretching Sonucu:\n", stretched_data)
